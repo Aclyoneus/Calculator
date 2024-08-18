@@ -34,7 +34,9 @@ if (deleteButton) {
 if (numberButtons) {
     numberButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            inputWindow.value = button.innerText;
+            inputWindow.value = inputWindow.value + button.innerText;
         })
     })
 }
+
+
