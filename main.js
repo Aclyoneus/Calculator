@@ -6,7 +6,13 @@ const resetButton = document.querySelector('.reset-button');
 const dotButton = document.querySelector('.dot-button');
 const equalsButton = document.querySelector('.equals-button');
 
-const currentNumber = numberButtons.forEach(function(button) {
+if (resetButton) {
+    resetButton.addEventListener('click', function() {
+        inputWindow.value = '';
+    });
+}
+
+numberButtons.forEach(function(button) {
     button.addEventListener('click', function() {
         inputWindow.value = button.innerText;
     })
