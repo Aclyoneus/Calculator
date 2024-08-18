@@ -6,17 +6,21 @@ const resetButton = document.querySelector('.reset-button');
 const dotButton = document.querySelector('.dot-button');
 const equalsButton = document.querySelector('.equals-button');
 
-function addNumbers(a, b) {
-    return a + b;
+let firstNumber = null;
+let secondNumber = null;
+let actionToPerform = null;
+
+function addNumbers(firstNumber, secondNumber) {
+    return firstNumber + secondNumber;
 }
-function subtractNumbers(a, b) {
-    return a - b;
+function subtractNumbers(firstNumber, secondNumber) {
+    return firstNumber - secondNumber;
 }
-function multiplyNumbers(a, b) {
-    return a * b;
+function multiplyNumbers(firstNumber, secondNumber) {
+    return firstNumber * secondNumber;
 }
-function divideNumbers(a, b) {
-    return a / b;
+function divideNumbers(firstNumber, secondNumber) {
+    return firstNumber / secondNumber;
 }
 
 if (resetButton) {
@@ -36,6 +40,27 @@ if (numberButtons) {
         button.addEventListener('click', function() {
             inputWindow.value = inputWindow.value + button.innerText;
         })
+    })
+}
+
+if (dotButton) {
+    dotButton.addEventListener('click', function() {
+        inputWindow.value = inputWindow.value + dotButton.innerText;
+    })
+}
+
+if (operatorButtons) {
+    operatorButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            inputWindow.value = inputWindow.value + button.innerText;
+        })
+    })
+}
+
+if (equalsButton) {
+    equalsButton.addEventListener('click', function(firstNumber, SecondNumber, operator) {
+
+
     })
 }
 

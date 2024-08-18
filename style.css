@@ -57,6 +57,9 @@ body {
 .calculator-button:hover {
     background-color: #88cfff;
 }
+.calculator-button:active {
+    background-color: #b4dbff;
+}
 
 .delete-button {
     font-size: 1.4rem;
