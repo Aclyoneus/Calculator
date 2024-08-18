@@ -6,14 +6,35 @@ const resetButton = document.querySelector('.reset-button');
 const dotButton = document.querySelector('.dot-button');
 const equalsButton = document.querySelector('.equals-button');
 
+function addNumbers(a, b) {
+    return a + b;
+}
+function subtractNumbers(a, b) {
+    return a - b;
+}
+function multiplyNumbers(a, b) {
+    return a * b;
+}
+function divideNumbers(a, b) {
+    return a / b;
+}
+
 if (resetButton) {
     resetButton.addEventListener('click', function() {
         inputWindow.value = '';
     });
 }
 
-numberButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-        inputWindow.value = button.innerText;
+if (deleteButton) {
+    deleteButton.addEventListener('click', function() {
+        inputWindow.value = inputWindow.value.slice(0, -1);
     })
-})
+}
+
+if (numberButtons) {
+    numberButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            inputWindow.value = button.innerText;
+        })
+    })
+}
