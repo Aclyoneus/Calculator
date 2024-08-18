@@ -58,9 +58,8 @@ if (operatorButtons) {
 }
 
 if (equalsButton) {
-    equalsButton.addEventListener('click', function(firstNumber, SecondNumber, operator) {
-
-
+    equalsButton.addEventListener('click', function() {
+        inputWindow.value = eval(inputWindow.value);
     })
 }
 
