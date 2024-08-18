@@ -58,6 +58,10 @@ body {
     background-color: #88cfff;
 }
 
+.delete-button {
+    font-size: 1.4rem;
+}
+
 .calculator-button-big {
-    height: 80%;
+    height: 60%;
 }

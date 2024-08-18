@@ -1,7 +1,12 @@
 const inputWindow = document.querySelector('.input-window');
-const calculatorButtons = document.querySelectorAll('.calculator-button');
+const operatorButtons = document.querySelectorAll('.operator-button');
+const numberButtons = document.querySelectorAll('.number-button');
+const deleteButton = document.querySelector('.delete-button');
+const resetButton = document.querySelector('.reset-button');
+const dotButton = document.querySelector('.dot-button');
+const equalsButton = document.querySelector('.equals-button');
 
-const currentNumber = calculatorButtons.forEach(function(button) {
+const currentNumber = numberButtons.forEach(function(button) {
     button.addEventListener('click', function() {
         inputWindow.value = button.innerText;
     })
