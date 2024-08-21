@@ -6,8 +6,8 @@ const resetButton = document.querySelector('.reset-button');
 const dotButton = document.querySelector('.dot-button');
 const equalsButton = document.querySelector('.equals-button');
 
-let firstNumberAsString = null;
-let secondNumberAsString = null;
+let firstNumberAsString = '';
+let secondNumberAsString = '';
 let actionToPerform = null;
 
 function addNumbers(firstNumber, secondNumber) {
@@ -26,12 +26,27 @@ function divideNumbers(firstNumber, secondNumber) {
 if (resetButton) {
     resetButton.addEventListener('click', function() {
         inputWindow.value = '';
+        firstNumberAsString = '';
+        secondNumberAsString = '';
+        actionToPerform = null;
     });
 }
 
 if (deleteButton) {
     deleteButton.addEventListener('click', function() {
-        inputWindow.value = inputWindow.value.slice(0, -1);
+        if (secondNumberAsString) {
+            inputWindow.value = inputWindow.value.slice(0, -1);
+            secondNumberAsString = secondNumberAsString.slice(0, -1);
+        } else if (actionToPerform) {
+            inputWindow.value = inputWindow.value.slice(0, -1);
+            actionToPerform = null;
+        } else {
+            inputWindow.value = inputWindow.value.slice(0, -1);
+            firstNumberAsString = firstNumberAsString.slice(0, -1);
+        }
+        console.log(firstNumberAsString);
+        console.log(secondNumberAsString);
+        console.log(actionToPerform);
     })
 }
 
@@ -39,7 +54,11 @@ if (numberButtons) {
     numberButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             inputWindow.value = inputWindow.value + button.innerText;
-            firstNumberAsString = firstNumberAsString + inputWindow.value;
+            if (actionToPerform !== null) {
+                secondNumberAsString = secondNumberAsString + button.innerText;
+            } else {
+                firstNumberAsString = firstNumberAsString + button.innerText;
+            }
         })
     })
 }
@@ -57,14 +76,34 @@ if (operatorButtons) {
     operatorButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             inputWindow.value = inputWindow.value + button.innerText;
-            actionToPerform = inputWindow.value;
+            actionToPerform = button.innerText;
         })
     })
 }
 
 if (equalsButton) {
     equalsButton.addEventListener('click', function() {
-
+        const firstNumber = parseFloat(firstNumberAsString);
+        const secondNumber = parseFloat(secondNumberAsString);
+        if (firstNumber !== null && secondNumber !== null) {
+            let equationResult = 0;
+            if (actionToPerform === '+') {
+                equationResult = addNumbers(firstNumber, secondNumber);console.log(equationResult);
+            }
+            if (actionToPerform === '-') {
+                equationResult = subtractNumbers(firstNumber, secondNumber);
+            }
+            if (actionToPerform === '*') {
+                equationResult = multiplyNumbers(firstNumber, secondNumber);
+            }
+            if (actionToPerform === '/') {
+                equationResult = divideNumbers(firstNumber, secondNumber);
+            }
+            inputWindow.value = equationResult;
+            firstNumberAsString = equationResult.toString();
+            secondNumberAsString = '';
+            actionToPerform = null;
+        }
     })
 }
 
