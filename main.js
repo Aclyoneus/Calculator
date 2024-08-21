@@ -9,6 +9,7 @@ const equalsButton = document.querySelector('.equals-button');
 let firstNumberAsString = '';
 let secondNumberAsString = '';
 let actionToPerform = null;
+const errorMessage = 'ERROR';
 
 function addNumbers(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
@@ -20,6 +21,9 @@ function multiplyNumbers(firstNumber, secondNumber) {
     return firstNumber * secondNumber;
 }
 function divideNumbers(firstNumber, secondNumber) {
+    if (secondNumber === 0) {
+        return errorMessage;
+    }
     return firstNumber / secondNumber;
 }
 
