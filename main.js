@@ -79,8 +79,12 @@ if (dotButton) {
 if (operatorButtons) {
     operatorButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            inputWindow.value = inputWindow.value + button.innerText;
-            actionToPerform = button.innerText;
+            if (inputWindow.value.includes(operatorButtons.innerText)) {
+                return;
+            } else {
+                inputWindow.value = inputWindow.value + button.innerText;
+                actionToPerform = button.innerText;
+            }
         })
     })
 }
@@ -110,5 +114,3 @@ if (equalsButton) {
         }
     })
 }
-
-
