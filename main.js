@@ -56,7 +56,6 @@ if (deleteButton) {
 if (numberButtons) {
     numberButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            inputWindow.value = inputWindow.value + button.innerText;
             if (actionToPerform !== null) {
                 if (secondNumberAsString === '0' && button.innerText === '0') {
                     return;
