@@ -58,10 +58,17 @@ if (numberButtons) {
         button.addEventListener('click', function() {
             inputWindow.value = inputWindow.value + button.innerText;
             if (actionToPerform !== null) {
+                if (secondNumberAsString === '0' && button.innerText === '0') {
+                    return;
+                }
                 secondNumberAsString = secondNumberAsString + button.innerText;
             } else {
+                if (firstNumberAsString === '0' && button.innerText === '0') {
+                    return;
+                }
                 firstNumberAsString = firstNumberAsString + button.innerText;
             }
+            refreshInput();
         })
     })
 }
@@ -87,8 +94,8 @@ if (operatorButtons) {
             if (inputWindow.value.includes(operatorButtons.innerText)) {
                 return;
             } else {
-                inputWindow.value = inputWindow.value + button.innerText;
                 actionToPerform = button.innerText;
+                refreshInput();
             }
         })
     })
