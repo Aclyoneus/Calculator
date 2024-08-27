@@ -27,6 +27,10 @@ function divideNumbers(firstNumber, secondNumber) {
     return firstNumber / secondNumber;
 }
 
+function refreshInput() {
+    inputWindow.value = `${firstNumberAsString}${actionToPerform || ''}${secondNumberAsString}`;
+}
+
 if (resetButton) {
     resetButton.addEventListener('click', function() {
         inputWindow.value = '';
@@ -39,18 +43,13 @@ if (resetButton) {
 if (deleteButton) {
     deleteButton.addEventListener('click', function() {
         if (secondNumberAsString) {
-            inputWindow.value = inputWindow.value.slice(0, -1);
             secondNumberAsString = secondNumberAsString.slice(0, -1);
         } else if (actionToPerform) {
-            inputWindow.value = inputWindow.value.slice(0, -1);
             actionToPerform = null;
         } else {
-            inputWindow.value = inputWindow.value.slice(0, -1);
             firstNumberAsString = firstNumberAsString.slice(0, -1);
         }
-        console.log(firstNumberAsString);
-        console.log(secondNumberAsString);
-        console.log(actionToPerform);
+        refreshInput();
     })
 }
 
@@ -69,10 +68,16 @@ if (numberButtons) {
 
 if (dotButton) {
     dotButton.addEventListener('click', function() {
-        if (inputWindow.value.includes('.')) {
-            return;
+        if (actionToPerform === null) {
+            if (!firstNumberAsString.includes('.')) {
+                firstNumberAsString = firstNumberAsString + dotButton.innerText;
+            }
+        } else {
+            if (!secondNumberAsString.includes('.')) {
+                secondNumberAsString = secondNumberAsString + dotButton.innerText;
+            }
         }
-        inputWindow.value = inputWindow.value + dotButton.innerText;
+        refreshInput();
     })
 }
 
