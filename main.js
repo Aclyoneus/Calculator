@@ -11,20 +11,23 @@ let secondNumberAsString = '';
 let actionToPerform = null;
 const errorMessage = 'ERROR';
 
-function addNumbers(firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
-}
-function subtractNumbers(firstNumber, secondNumber) {
-    return firstNumber - secondNumber;
-}
-function multiplyNumbers(firstNumber, secondNumber) {
-    return firstNumber * secondNumber;
-}
-function divideNumbers(firstNumber, secondNumber) {
-    if (secondNumber === 0) {
+function getEquationResult(actionToPerform, firstNumber, secondNumber) {
+    let equationResult;
+    if (actionToPerform === '+') {
+        equationResult = firstNumber + secondNumber;
+    }
+    if (actionToPerform === '-') {
+        equationResult = firstNumber - secondNumber;
+    }
+    if (actionToPerform === '*') {
+        equationResult = firstNumber * secondNumber;
+    }
+    if (actionToPerform === '/' && secondNumber !== 0) {
+        equationResult = firstNumber / secondNumber;
+    } else if (actionToPerform === '/' && secondNumber === 0) {
         return errorMessage;
     }
-    return firstNumber / secondNumber;
+    return equationResult;
 }
 
 function refreshInput() {
@@ -74,14 +77,10 @@ if (numberButtons) {
 
 if (dotButton) {
     dotButton.addEventListener('click', function() {
-        if (actionToPerform === null) {
-            if (!firstNumberAsString.includes('.')) {
-                firstNumberAsString = firstNumberAsString + dotButton.innerText;
-            }
-        } else {
-            if (!secondNumberAsString.includes('.')) {
-                secondNumberAsString = secondNumberAsString + dotButton.innerText;
-            }
+        if (actionToPerform === null && !firstNumberAsString.includes('.')) {
+            firstNumberAsString = firstNumberAsString + dotButton.innerText;
+        } else if (!secondNumberAsString.includes('.')) {
+            secondNumberAsString = secondNumberAsString + dotButton.innerText;
         }
         refreshInput();
     })
@@ -104,20 +103,8 @@ if (equalsButton) {
     equalsButton.addEventListener('click', function() {
         const firstNumber = parseFloat(firstNumberAsString);
         const secondNumber = parseFloat(secondNumberAsString);
-        if (firstNumber !== null && secondNumber !== null) {
-            let equationResult = 0;
-            if (actionToPerform === '+') {
-                equationResult = addNumbers(firstNumber, secondNumber);console.log(equationResult);
-            }
-            if (actionToPerform === '-') {
-                equationResult = subtractNumbers(firstNumber, secondNumber);
-            }
-            if (actionToPerform === '*') {
-                equationResult = multiplyNumbers(firstNumber, secondNumber);
-            }
-            if (actionToPerform === '/') {
-                equationResult = divideNumbers(firstNumber, secondNumber);
-            }
+        if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+            equationResult = getEquationResult(actionToPerform, firstNumber, secondNumber);
             inputWindow.value = equationResult;
             firstNumberAsString = equationResult.toString();
             secondNumberAsString = '';
