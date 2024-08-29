@@ -12,23 +12,23 @@ let actionToPerform = null;
 const errorMessage = 'ERROR';
 
 function getEquationResult(actionToPerform, firstNumber, secondNumber) {
-    let equationResult;
     if (actionToPerform === '+') {
-        equationResult = firstNumber + secondNumber;
+        return firstNumber + secondNumber;
     }
     if (actionToPerform === '-') {
-        equationResult = firstNumber - secondNumber;
+        return firstNumber - secondNumber;
     }
     if (actionToPerform === '*') {
-        equationResult = firstNumber * secondNumber;
+        return firstNumber * secondNumber;
     }
     if (actionToPerform === '/' && secondNumber !== 0) {
-        equationResult = firstNumber / secondNumber;
+        return firstNumber / secondNumber;
     } else if (actionToPerform === '/' && secondNumber === 0) {
         return errorMessage;
     }
-    return equationResult;
 }
+
+const equationResult = getEquationResult(actionToPerform, firstNumberAsString, secondNumberAsString);
 
 function refreshInput() {
     inputWindow.value = `${firstNumberAsString}${actionToPerform || ''}${secondNumberAsString}`;
@@ -104,11 +104,11 @@ if (equalsButton) {
         const firstNumber = parseFloat(firstNumberAsString);
         const secondNumber = parseFloat(secondNumberAsString);
         if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
-            equationResult = getEquationResult(actionToPerform, firstNumber, secondNumber);
-            inputWindow.value = equationResult;
+            const equationResult = getEquationResult(actionToPerform, firstNumber, secondNumber);
             firstNumberAsString = equationResult.toString();
             secondNumberAsString = '';
             actionToPerform = null;
+            refreshInput();
         }
     })
 }
