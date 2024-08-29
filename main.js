@@ -24,11 +24,9 @@ function getEquationResult(actionToPerform, firstNumber, secondNumber) {
     if (actionToPerform === '/' && secondNumber !== 0) {
         return firstNumber / secondNumber;
     } else if (actionToPerform === '/' && secondNumber === 0) {
-        return errorMessage;
+        return null;
     }
 }
-
-const equationResult = getEquationResult(actionToPerform, firstNumberAsString, secondNumberAsString);
 
 function refreshInput() {
     inputWindow.value = `${firstNumberAsString}${actionToPerform || ''}${secondNumberAsString}`;
@@ -103,8 +101,11 @@ if (equalsButton) {
     equalsButton.addEventListener('click', function() {
         const firstNumber = parseFloat(firstNumberAsString);
         const secondNumber = parseFloat(secondNumberAsString);
-        if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
-            const equationResult = getEquationResult(actionToPerform, firstNumber, secondNumber);
+        const equationResult = getEquationResult(actionToPerform, firstNumber, secondNumber);
+        if (equationResult === null) {
+            inputWindow.value = errorMessage;
+        }
+        if (!isNaN(firstNumber) && !isNaN(secondNumber) && equationResult !== null) {
             firstNumberAsString = equationResult.toString();
             secondNumberAsString = '';
             actionToPerform = null;
